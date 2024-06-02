@@ -12,7 +12,8 @@ import {
   GET_TODAYS_ATTENDANCE_FAIL,
   GET_ALL_ATTENDANCE_REQUEST,
   GET_ALL_ATTENDANCE_SUCCESS,
-  GET_ALL_ATTENDANCE_FAIL,GET_ALL_USERS_ATTENDANCE_REQUEST,
+  GET_ALL_ATTENDANCE_FAIL,
+  GET_ALL_USERS_ATTENDANCE_REQUEST,
   GET_ALL_USERS_ATTENDANCE_SUCCESS,
   GET_ALL_USERS_ATTENDANCE_FAIL,
   GET_ALL_USERS_ATTENDANCE_RESET,
@@ -37,7 +38,11 @@ export const checkIn = () => async (dispatch, getState) => {
     };
 
     // Perform API call to check in the user, pass user information in the request headers
-    const { data } = await axios.post("/api/attendance/checkin", {}, config);
+    const { data } = await axios.post(
+      "${process.env.REACT_APP_RAILWAY_URL}/api/attendance/checkin",
+      {},
+      config
+    );
 
     dispatch({
       type: USER_CHECK_IN_SUCCESS,
@@ -73,7 +78,11 @@ export const checkOut = () => async (dispatch, getState) => {
     };
 
     // Perform API call to check out the user, pass user information in the request headers
-    const { data } = await axios.put("/api/attendance/checkout", {}, config);
+    const { data } = await axios.put(
+      "${process.env.REACT_APP_RAILWAY_URL}/api/attendance/checkout",
+      {},
+      config
+    );
 
     dispatch({
       type: USER_CHECK_OUT_SUCCESS,
@@ -110,7 +119,10 @@ export const getTodaysAttendanceAction = () => async (dispatch, getState) => {
     };
 
     // Use Axios to make the API call
-    const response = await axios.get("/api/attendance/today", config);
+    const response = await axios.get(
+      "${process.env.REACT_APP_RAILWAY_URL}/api/attendance/today",
+      config
+    );
 
     dispatch({
       type: GET_TODAYS_ATTENDANCE_SUCCESS,
@@ -141,7 +153,10 @@ export const getAllAttendance = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/api/attendance/allattendance`, config);
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_RAILWAY_URL}/api/attendance/allattendance`,
+      config
+    );
 
     dispatch({
       type: GET_ALL_ATTENDANCE_SUCCESS,
@@ -158,8 +173,7 @@ export const getAllAttendance = () => async (dispatch, getState) => {
   }
 };
 
-
-export const getAllUsersAttendance = () => async (dispatch,getState) => {
+export const getAllUsersAttendance = () => async (dispatch, getState) => {
   try {
     dispatch({ type: GET_ALL_USERS_ATTENDANCE_REQUEST });
     const {
@@ -172,7 +186,10 @@ export const getAllUsersAttendance = () => async (dispatch,getState) => {
       },
     };
 
-    const { data } = await axios.get("/api/attendance/all",config); // Adjust the API endpoint accordingly
+    const { data } = await axios.get(
+      "${process.env.REACT_APP_RAILWAY_URL}/api/attendance/all",
+      config
+    ); // Adjust the API endpoint accordingly
 
     dispatch({
       type: GET_ALL_USERS_ATTENDANCE_SUCCESS,

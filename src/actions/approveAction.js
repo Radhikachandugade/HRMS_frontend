@@ -28,7 +28,11 @@ export const createLeaveRequestAction =
         },
       };
 
-      const { data } = await axios.post("/api/leaves", leaveRequest, config);
+      const { data } = await axios.post(
+        "${process.env.REACT_APP_RAILWAY_URL}/api/leaves",
+        leaveRequest,
+        config
+      );
 
       dispatch({ type: LEAVE_REQUEST_CREATE_SUCCESS, payload: data });
     } catch (error) {
@@ -54,7 +58,10 @@ export const listLeaveRequests = () => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.get("/api/leaves", config); // Adjust the endpoint as per your backend route
+    const { data } = await axios.get(
+      "${process.env.REACT_APP_RAILWAY_URL}/api/leaves",
+      config
+    ); // Adjust the endpoint as per your backend route
 
     dispatch({
       type: LEAVE_REQUEST_LIST_SUCCESS,
@@ -83,7 +90,10 @@ export const listLeaveAdminRequests = () => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.get("/api/leaves/allrequest", config); // Adjust the endpoint as per your backend route
+    const { data } = await axios.get(
+      "${process.env.REACT_APP_RAILWAY_URL}/api/leaves/allrequest",
+      config
+    ); // Adjust the endpoint as per your backend route
 
     dispatch({
       type: LEAVE_REQUEST_LIST_SUCCESS_ADMIN,
@@ -100,39 +110,42 @@ export const listLeaveAdminRequests = () => async (dispatch, getState) => {
   }
 };
 
+export const updateLeaveRequest =
+  ({ id, pendingLeaves }) =>
+  async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: LEAVE_REQUEST_UPDATE_REQUEST,
+      });
 
-export const updateLeaveRequest = ({id, pendingLeaves}) => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: LEAVE_REQUEST_UPDATE_REQUEST,
-    });
+      const {
+        userLogin: { userInfo },
+      } = getState();
 
-    const {
-      userLogin: { userInfo },
-    } = getState();
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
 
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    };
+      const { data } = await axios.put(
+        `${process.env.REACT_APP_RAILWAY_URL}/api/leaves/${id}/status`,
+        { pendingLeaves },
+        config
+      );
 
-    const { data } = await axios.put(`/api/leaves/${id}/status`, { pendingLeaves }, config);
-
-    dispatch({
-      type: LEAVE_REQUEST_UPDATE_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    dispatch({
-      type: LEAVE_REQUEST_UPDATE_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-  }
-};
-
-
+      dispatch({
+        type: LEAVE_REQUEST_UPDATE_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: LEAVE_REQUEST_UPDATE_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
