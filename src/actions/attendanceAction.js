@@ -39,7 +39,7 @@ export const checkIn = () => async (dispatch, getState) => {
 
     // Perform API call to check in the user, pass user information in the request headers
     const { data } = await axios.post(
-      "${process.env.REACT_APP_RAILWAY_URL}/api/attendance/checkin",
+      "https://hrmsbackend.up.railway.app/api/attendance/checkin",
       {},
       config
     );
@@ -79,7 +79,7 @@ export const checkOut = () => async (dispatch, getState) => {
 
     // Perform API call to check out the user, pass user information in the request headers
     const { data } = await axios.put(
-      "${process.env.REACT_APP_RAILWAY_URL}/api/attendance/checkout",
+      "https://hrmsbackend.up.railway.app/api/attendance/checkout",
       {},
       config
     );
@@ -120,7 +120,7 @@ export const getTodaysAttendanceAction = () => async (dispatch, getState) => {
 
     // Use Axios to make the API call
     const response = await axios.get(
-      "${process.env.REACT_APP_RAILWAY_URL}/api/attendance/today",
+      "https://hrmsbackend.up.railway.app/api/attendance/today",
       config
     );
 
@@ -154,7 +154,7 @@ export const getAllAttendance = () => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      `${process.env.REACT_APP_RAILWAY_URL}/api/attendance/allattendance`,
+      `https://hrmsbackend.up.railway.app/api/attendance/allattendance`,
       config
     );
 
@@ -187,7 +187,7 @@ export const getAllUsersAttendance = () => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      "${process.env.REACT_APP_RAILWAY_URL}/api/attendance/all",
+      "https://hrmsbackend.up.railway.app/api/attendance/all",
       config
     ); // Adjust the API endpoint accordingly
 

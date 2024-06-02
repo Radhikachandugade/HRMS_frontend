@@ -38,7 +38,7 @@ export const login = (email, password) => async (dispatch) => {
     };
 
     const { data } = await axios.post(
-      `${process.env.REACT_APP_RAILWAY_URL}/api/users/login`,
+      `https://hrmsbackend.up.railway.app/api/users/login`,
       { email, password },
       config
     );
@@ -87,7 +87,7 @@ export const register =
       };
 
       await axios.post(
-        `${process.env.REACT_APP_RAILWAY_URL}/api/users`,
+        `https://hrmsbackend.up.railway.app/api/users`,
         {
           name,
           email,
@@ -128,7 +128,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      `${process.env.REACT_APP_RAILWAY_URL}/api/users/${id}`,
+      `https://hrmsbackend.up.railway.app/api/users/${id}`,
       config
     );
 
@@ -160,7 +160,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `${process.env.REACT_APP_RAILWAY_URL}/api/users/profile`,
+      `https://hrmsbackend.up.railway.app/api/users/profile`,
       user,
       config
     );
@@ -195,7 +195,7 @@ export const listUsers = () => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      `${process.env.REACT_APP_RAILWAY_URL}/api/users`,
+      `https://hrmsbackend.up.railway.app/api/users`,
       config
     );
 
@@ -226,7 +226,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
     };
 
     await axios.delete(
-      `${process.env.REACT_APP_RAILWAY_URL}/api/users/${id}`,
+      `https://hrmsbackend.up.railway.app/api/users/${id}`,
       config
     );
 
@@ -258,7 +258,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.put(
-      `${process.env.REACT_APP_RAILWAY_URL}/api/users/${user._id}`,
+      `https://hrmsbackend.up.railway.app/api/users/${user._id}`,
       user,
       config
     );

@@ -29,7 +29,7 @@ export const createLeaveRequestAction =
       };
 
       const { data } = await axios.post(
-        "${process.env.REACT_APP_RAILWAY_URL}/api/leaves",
+        "https://hrmsbackend.up.railway.app/api/leaves",
         leaveRequest,
         config
       );
@@ -59,7 +59,7 @@ export const listLeaveRequests = () => async (dispatch, getState) => {
       },
     };
     const { data } = await axios.get(
-      "${process.env.REACT_APP_RAILWAY_URL}/api/leaves",
+      "https://hrmsbackend.up.railway.app/api/leaves",
       config
     ); // Adjust the endpoint as per your backend route
 
@@ -91,7 +91,7 @@ export const listLeaveAdminRequests = () => async (dispatch, getState) => {
       },
     };
     const { data } = await axios.get(
-      "${process.env.REACT_APP_RAILWAY_URL}/api/leaves/allrequest",
+      "https://hrmsbackend.up.railway.app/api/leaves/allrequest",
       config
     ); // Adjust the endpoint as per your backend route
 
@@ -130,7 +130,7 @@ export const updateLeaveRequest =
       };
 
       const { data } = await axios.put(
-        `${process.env.REACT_APP_RAILWAY_URL}/api/leaves/${id}/status`,
+        `https://hrmsbackend.up.railway.app/api/leaves/${id}/status`,
         { pendingLeaves },
         config
       );
