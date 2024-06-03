@@ -109,9 +109,9 @@ const HomeScreen = () => {
   };
 
   const buttonStyle = {
-    height: "40px", // Adjust the height as needed
-    width: "120px", // Adjust the width as needed
-    position: "relative",
+    height: "40px",
+    width: "120px",
+    position: "sticky",
     left: "41rem",
   };
 
