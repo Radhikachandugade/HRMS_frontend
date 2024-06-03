@@ -168,7 +168,7 @@ const HomeScreen = () => {
       <Box bgColor="white" rounded="lg" shadow="lg" px="5" py="5">
         <Grid mb="5" alignItems="center" gap="10">
           <Box flex="50%">
-            <Heading as="h2" fontSize="xl">
+            <Heading as="h2" fontSize="xl" textAlign="center">
               Current Time {currentTime}
             </Heading>
             {/* <Heading as="h2" mb="8" fontSize="xl">
