@@ -61,7 +61,7 @@ export const listLeaveRequests = () => async (dispatch, getState) => {
     const { data } = await axios.get(
       "https://hrmsbackend.up.railway.app/api/leaves",
       config
-    ); // Adjust the endpoint as per your backend route
+    ); /* Adjust the endpoint as per your backend route*/
 
     dispatch({
       type: LEAVE_REQUEST_LIST_SUCCESS,
@@ -93,7 +93,7 @@ export const listLeaveAdminRequests = () => async (dispatch, getState) => {
     const { data } = await axios.get(
       "https://hrmsbackend.up.railway.app/api/leaves/allrequest",
       config
-    ); // Adjust the endpoint as per your backend route
+    ); /* Adjust the endpoint as per your backend route*/
 
     dispatch({
       type: LEAVE_REQUEST_LIST_SUCCESS_ADMIN,

@@ -124,7 +124,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
     dispatch({ type: USER_DETAILS_REQUEST });
 
     const {
-      userLogin: { userInfo }, // 2 level destructuring
+      userLogin: { userInfo } /*2 level destructuring*/,
     } = getState();
 
     const config = {

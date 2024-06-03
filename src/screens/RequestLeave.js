@@ -31,7 +31,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   createLeaveRequestAction,
   listLeaveRequests,
-} from "../actions/approveAction"; // Replace with your actual action
+} from "../actions/approveAction"; /* Replace with your actual action*/
 import Message from "../components/Message";
 import FormContainer from "../components/FormContainer";
 import { getUserDetails } from "../actions/userActions";
@@ -70,7 +70,7 @@ const RequestLeaveScreen = () => {
       setSuccessCreate(false);
     }
   }, [dispatch, successCreate, success]);
-  // console.log(userInfo)
+  /*console.log(userInfo)*/
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(
@@ -93,7 +93,9 @@ const RequestLeaveScreen = () => {
               Request leave
             </Heading>
             {error && <Message type="error">{error}</Message>}
-            {success &&successCreate ?<Message type="success">SuccessFully Created A Request</Message>:null}
+            {success && successCreate ? (
+              <Message type="success">SuccessFully Created A Request</Message>
+            ) : null}
             <form onSubmit={submitHandler}>
               <FormControl id="startDate" isRequired mb={4}>
                 <FormLabel>Start Date</FormLabel>
@@ -117,7 +119,9 @@ const RequestLeaveScreen = () => {
                 <FormLabel>Pending Leaves</FormLabel>
                 <Input
                   type="number"
-                  value={user.leaveCount} // Ensure this is provided by the backend
+                  value={
+                    user.leaveCount
+                  } /*Ensure this is provided by the backend*/
                   readOnly
                   disabled
                 />

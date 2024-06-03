@@ -88,8 +88,10 @@ export const allAttendanceReducer = (state = { attendanceAll: [] }, action) => {
   }
 };
 
-
-export const allUsersAttendanceReducer = (state = { attendance: [] }, action) => {
+export const allUsersAttendanceReducer = (
+  state = { attendance: [] },
+  action
+) => {
   switch (action.type) {
     case GET_ALL_USERS_ATTENDANCE_REQUEST:
       return { loading: true, attendance: [] };

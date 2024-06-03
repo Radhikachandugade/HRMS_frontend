@@ -10,7 +10,6 @@ import {
   Th,
   Thead,
   Tr,
-  
   Drawer,
   DrawerBody,
   DrawerCloseButton,
@@ -18,12 +17,13 @@ import {
   DrawerHeader,
   DrawerOverlay,
 } from "@chakra-ui/react";
-import { useEffect ,useState} from "react";
+import { useEffect, useState } from "react";
 import {
   IoCheckmarkCircleSharp,
   IoCloseCircleSharp,
   IoPencilSharp,
-  IoTrashBinSharp,IoAdd
+  IoTrashBinSharp,
+  IoAdd,
 } from "react-icons/io5";
 import { SlCalender } from "react-icons/sl";
 import { useDispatch, useSelector } from "react-redux";
@@ -31,7 +31,10 @@ import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { deleteUser, listUsers } from "../actions/userActions";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { USER_DETAILS_RESET, USER_UPDATE_RESET } from "../constants/userConstants";
+import {
+  USER_DETAILS_RESET,
+  USER_UPDATE_RESET,
+} from "../constants/userConstants";
 
 import MyCalendar from "../components/Calender";
 import { getAllUsersAttendance } from "../actions/attendanceAction";
@@ -43,7 +46,6 @@ const UserListScreen = () => {
   const userList = useSelector((state) => state.userList);
   const { loading, error, users } = userList;
 
-  
   const allUsersAttendance = useSelector((state) => state.allUsersAttendance);
   const { attendance } = allUsersAttendance;
 
@@ -56,9 +58,9 @@ const UserListScreen = () => {
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
       dispatch(listUsers());
-      dispatch(getAllUsersAttendance())
-      dispatch({type:USER_UPDATE_RESET})
-      dispatch({type:USER_DETAILS_RESET})
+      dispatch(getAllUsersAttendance());
+      dispatch({ type: USER_UPDATE_RESET });
+      dispatch({ type: USER_DETAILS_RESET });
     } else {
       navigate("/login");
     }
@@ -70,7 +72,7 @@ const UserListScreen = () => {
     }
   };
 
-  // ***************Drawer Open *******************//
+  /* ***************Drawer Open ******************* */
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedUserAttendance, setSelectedUserAttendance] = useState([]);
   const handleOpenDrawer = (userId) => {
@@ -81,18 +83,15 @@ const UserListScreen = () => {
 
   const handleCloseDrawer = () => {
     setIsDrawerOpen(false);
-    
   };
-
 
   return (
     <>
-       <Flex mb="5" alignItems="center" justifyContent="space-between">
+      <Flex mb="5" alignItems="center" justifyContent="space-between">
         <Heading as="h1" fontSize="3xl" mb="5">
           Users
         </Heading>
-        <Button  as={RouterLink}
-                        to={`/admin/register`}colorScheme="teal">
+        <Button as={RouterLink} to={`/admin/register`} colorScheme="teal">
           <Icon as={IoAdd} mr="2" fontSize="xl" fontWeight="bold" />
           Create User
         </Button>
@@ -131,13 +130,14 @@ const UserListScreen = () => {
                   <Td>{user.employeeCode}</Td>
                   <Td>{user.officeTimings}</Td>
                   <Td>
-                  <Button
-                        mr="4"
-                        onClick={() => handleOpenDrawer(user._id)}
-                        colorScheme="teal"
-                      >
-                        <Icon as={SlCalender} color="white" size="sm" />
-                      </Button></Td>
+                    <Button
+                      mr="4"
+                      onClick={() => handleOpenDrawer(user._id)}
+                      colorScheme="teal"
+                    >
+                      <Icon as={SlCalender} color="white" size="sm" />
+                    </Button>
+                  </Td>
                   <Td>
                     {user.isAdmin ? (
                       <Icon
@@ -178,19 +178,19 @@ const UserListScreen = () => {
               ))}
             </Tbody>
           </Table>
-          
-      <Drawer onClose={handleCloseDrawer} isOpen={isDrawerOpen} size="xl" >
-        <DrawerOverlay />
-        <DrawerContent style={{ top: '5rem' }} > 
-          <DrawerCloseButton />
-          <DrawerHeader>Calendar</DrawerHeader>
-          <DrawerBody >
-            {/* Render the calendar component */}
-            
-            <MyCalendar attendanceData={selectedUserAttendance}/>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+
+          <Drawer onClose={handleCloseDrawer} isOpen={isDrawerOpen} size="xl">
+            <DrawerOverlay />
+            <DrawerContent style={{ top: "5rem" }}>
+              <DrawerCloseButton />
+              <DrawerHeader>Calendar</DrawerHeader>
+              <DrawerBody>
+                {/* Render the calendar component */}
+
+                <MyCalendar attendanceData={selectedUserAttendance} />
+              </DrawerBody>
+            </DrawerContent>
+          </Drawer>
         </Box>
       )}
     </>

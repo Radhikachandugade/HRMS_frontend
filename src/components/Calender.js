@@ -9,10 +9,10 @@ import { IoCloudDownload } from "react-icons/io5";
 const localizer = momentLocalizer(moment);
 
 const MyCalendar = ({ attendanceData }) => {
-  // *************DOWNLOAD ATTENDANCE ******************
-  // Create a new workbook
+  /* *************DOWNLOAD ATTENDANCE ****************** */
+  /* Create a new workbook*/
   const handleDownload = () => {
-    // flatten object like this {id: 1, title:'', category: ''};
+    /* flatten object like this {id: 1, title:'', category: ''};*/
     const rows = attendanceData.map((attendance) => ({
       id: attendance._id,
       loginTime: attendance.loginTime,
@@ -20,34 +20,34 @@ const MyCalendar = ({ attendanceData }) => {
       status: attendance.status,
     }));
 
-    // create workbook and worksheet
+    /* create workbook and worksheet*/
     const workbook = XLSX.utils.book_new();
     const worksheet = XLSX.utils.json_to_sheet(rows);
 
     XLSX.utils.book_append_sheet(workbook, worksheet, "Attendance");
 
-    // customize header names
+    /* customize header names*/
     XLSX.utils.sheet_add_aoa(worksheet, [
       ["Attendance ID", "Login Time", "Logout Time", "Status"],
     ]);
 
     XLSX.writeFile(workbook, "AttendanceReport.xlsx", { compression: true });
   };
-  //*********************END *****************************************/
+  /**********************END *****************************************/
 
-  // Map attendance data to events
+  /* Map attendance data to events*/
   const events = attendanceData.map((attendance) => ({
-    title: attendance.status || "Unknown", // Customize as needed
+    title: attendance.status || "Unknown" /* Customize as needed*/,
     start: new Date(attendance.loginTime),
     end: attendance.logoutTime
       ? new Date(attendance.logoutTime)
       : new Date(attendance.loginTime),
-    status: attendance.status, // Add status to event object for styling
+    status: attendance.status /* Add status to event object for styling*/,
   }));
 
-  // Event style getter based on status
+  /* Event style getter based on status*/
   const eventStyleGetter = (event) => {
-    let backgroundColor = "blue"; // Default color
+    let backgroundColor = "blue"; /* Default color*/
     if (event.status) {
       switch (event.status.toLowerCase()) {
         case "present":
@@ -56,9 +56,9 @@ const MyCalendar = ({ attendanceData }) => {
         case "absent":
           backgroundColor = "red";
           break;
-        // Add more cases for other statuses if needed
+        /* Add more cases for other statuses if needed*/
         default:
-          backgroundColor = "blue"; // Default color
+          backgroundColor = "blue"; /* Default color*/
       }
     }
 
@@ -100,8 +100,11 @@ const MyCalendar = ({ attendanceData }) => {
           events={events}
           startAccessor="start"
           endAccessor="end"
-          style={{ height: 400, width: "100%" }} // Adjust height and width as needed
-          eventPropGetter={eventStyleGetter} // Apply custom styles
+          style={{
+            height: 400,
+            width: "100%",
+          }} /* Adjust height and width as needed*/
+          eventPropGetter={eventStyleGetter} /* Apply custom styles*/
         />
       </div>
     </div>

@@ -11,7 +11,7 @@ import {
   LEAVE_REQUEST_LIST_SUCCESS_ADMIN,
   LEAVE_REQUEST_LIST_FAIL_ADMIN,
   LEAVE_REQUEST_LIST_REQUEST_ADMIN,
-  LEAVE_REQUEST_UPDATE_RESET
+  LEAVE_REQUEST_UPDATE_RESET,
 } from "../constants/approveConstants";
 
 export const leaveRequestCreateReducer = (state = {}, action) => {
@@ -27,7 +27,6 @@ export const leaveRequestCreateReducer = (state = {}, action) => {
   }
 };
 
-// Reducer to manage leave request list state
 export const leaveRequestListReducer = (
   state = { leaveRequests: [] },
   action
@@ -60,7 +59,6 @@ export const leaveRequestAdminListReducer = (
   }
 };
 
-
 export const leaveRequestUpdateReducer = (state = {}, action) => {
   switch (action.type) {
     case LEAVE_REQUEST_UPDATE_REQUEST:
@@ -69,8 +67,8 @@ export const leaveRequestUpdateReducer = (state = {}, action) => {
       return { loading: false, success: true, leaveRequest: action.payload };
     case LEAVE_REQUEST_UPDATE_FAIL:
       return { loading: false, error: action.payload };
-      case LEAVE_REQUEST_UPDATE_RESET:
-        return {}
+    case LEAVE_REQUEST_UPDATE_RESET:
+      return {};
     default:
       return state;
   }

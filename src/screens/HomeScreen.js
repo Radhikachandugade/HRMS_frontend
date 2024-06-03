@@ -66,13 +66,13 @@ const HomeScreen = () => {
     if (!userInfo) navigate("/login");
   }, [navigate]);
 
-  // Fetch today's attendance when component mounts
+  /* Fetch today's attendance when component mounts*/
   useEffect(() => {
     dispatch(getTodaysAttendanceAction());
     dispatch(getAllAttendance());
   }, [dispatch]);
 
-  // Function to update current time every second
+  /* Function to update current time every second*/
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date().toLocaleTimeString());
@@ -92,10 +92,12 @@ const HomeScreen = () => {
     }
   }, [success, checkInSuccess, checkOutSuccess, dispatch]);
 
-  // Set latestRecord when attendance data changes
+  /* Set latestRecord when attendance data changes*/
   useEffect(() => {
     if (!loading) {
-      setLatestRecord(attendance); // Set the latest record or null if no attendance data
+      setLatestRecord(
+        attendance
+      ); /* Set the latest record or null if no attendance data*/
     }
   }, [attendance, loading]);
 
@@ -108,8 +110,8 @@ const HomeScreen = () => {
   };
 
   const buttonStyle = {
-    height: "40px", // Adjust the height as needed
-    width: "120px", // Adjust the width as needed
+    height: "40px" /* Adjust the height as needed*/,
+    width: "120px" /*Adjust the width as needed*/,
   };
 
   const calculateTotalTimeWorked = (record) => {
@@ -130,19 +132,19 @@ const HomeScreen = () => {
 
   const totalTime = calculateTotalTimeWorked(latestRecord);
 
-  // console.log(totalTime);
+  /* console.log(totalTime);*/
   const isEmpty = (obj) => {
     return Object.entries(obj).length === 0 && obj.constructor === Object;
   };
 
-  // Initialize latestRecord as null
+  /*Initialize latestRecord as null*/
   const handleCheckInOrOut = () => {
     if (!isEmpty(latestRecord) && !latestRecord.logoutTime) {
       dispatch(checkOut());
     } else {
       dispatch(checkIn());
     }
-    setSuccess(true); // Set success to true to trigger the useEffect
+    setSuccess(true); /*Set success to true to trigger the useEffect*/
   };
 
   return (
@@ -196,12 +198,12 @@ const HomeScreen = () => {
             ) : null}
             <Heading as="h2" mb="4" fontSize="xl">
               {loading || checkInLoading || checkOutLoading ? (
-                // Show loading indicator while processing
+                /* Show loading indicator while processing*/
                 <Skeleton
                   height={buttonStyle.height}
                   width={buttonStyle.width}
                 />
-              ) : // Show check-in or check-out button based on the latestRecord
+              ) : /* Show check-in or check-out button based on the latestRecord*/
               attendance && !isEmpty(attendance) ? (
                 <Button
                   colorScheme={

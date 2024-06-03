@@ -19,17 +19,16 @@ import {
   GET_ALL_USERS_ATTENDANCE_RESET,
 } from "../constants/attendanceConstants";
 
-// Action to handle user check-in
 export const checkIn = () => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_CHECK_IN_REQUEST });
 
-    // Get user information from Redux state
+    /* Get user information from Redux state*/
     const {
       userLogin: { userInfo },
     } = getState();
 
-    // Construct headers with authorization token
+    /* Construct headers with authorization token*/
     const config = {
       headers: {
         Authorization: `Bearer ${userInfo.token}`,
@@ -37,7 +36,7 @@ export const checkIn = () => async (dispatch, getState) => {
       },
     };
 
-    // Perform API call to check in the user, pass user information in the request headers
+    /* Perform API call to check in the user, pass user information in the request headers*/
     const { data } = await axios.post(
       "https://hrmsbackend.up.railway.app/api/attendance/checkin",
       {},
@@ -59,17 +58,17 @@ export const checkIn = () => async (dispatch, getState) => {
   }
 };
 
-// Action to handle user check-out
+/* Action to handle user check-out*/
 export const checkOut = () => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_CHECK_OUT_REQUEST });
 
-    // Get user information from Redux state
+    /* Get user information from Redux state*/
     const {
       userLogin: { userInfo },
     } = getState();
 
-    // Construct headers with authorization token
+    /* Construct headers with authorization token*/
     const config = {
       headers: {
         Authorization: `Bearer ${userInfo.token}`,
@@ -77,7 +76,7 @@ export const checkOut = () => async (dispatch, getState) => {
       },
     };
 
-    // Perform API call to check out the user, pass user information in the request headers
+    /* Perform API call to check out the user, pass user information in the request headers*/
     const { data } = await axios.put(
       "https://hrmsbackend.up.railway.app/api/attendance/checkout",
       {},
@@ -99,7 +98,7 @@ export const checkOut = () => async (dispatch, getState) => {
   }
 };
 
-// Action to reset check-out state
+/* Action to reset check-out state*/
 export const resetCheckOut = () => (dispatch) => {
   dispatch({ type: USER_CHECK_OUT_RESET });
 };
@@ -118,7 +117,7 @@ export const getTodaysAttendanceAction = () => async (dispatch, getState) => {
       },
     };
 
-    // Use Axios to make the API call
+    /* Use Axios to make the API call*/
     const response = await axios.get(
       "https://hrmsbackend.up.railway.app/api/attendance/today",
       config
@@ -189,7 +188,7 @@ export const getAllUsersAttendance = () => async (dispatch, getState) => {
     const { data } = await axios.get(
       "https://hrmsbackend.up.railway.app/api/attendance/all",
       config
-    ); // Adjust the API endpoint accordingly
+    ); /* Adjust the API endpoint accordingly*/
 
     dispatch({
       type: GET_ALL_USERS_ATTENDANCE_SUCCESS,
