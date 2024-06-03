@@ -7,9 +7,8 @@ import {
   Icon,
   Skeleton,
   layout,
-  Grid,
+  useMediaQuery,
   Divider,
-  Spacer,
 } from "@chakra-ui/react";
 import { IoGitPullRequestSharp } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
@@ -32,7 +31,7 @@ const HomeScreen = () => {
   const [currentTime, setCurrentTime] = useState(
     new Date().toLocaleTimeString()
   );
-
+  const [isMobile] = useMediaQuery("(max-width: 600px)");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [success, setSuccess] = useState(false);
@@ -109,10 +108,8 @@ const HomeScreen = () => {
   };
 
   const buttonStyle = {
-    height: "40px",
-    width: "120px",
-    position: "relative",
-    left: "41rem",
+    height: "40px", // Adjust the height as needed
+    width: "120px", // Adjust the width as needed
   };
 
   const calculateTotalTimeWorked = (record) => {
@@ -166,17 +163,32 @@ const HomeScreen = () => {
       </Flex>
 
       <Box bgColor="white" rounded="lg" shadow="lg" px="5" py="5">
-        <Grid mb="5" alignItems="center" gap="10">
-          <Box flex="50%">
-            <Heading as="h2" fontSize="xl" textAlign="center">
-              Current Time {currentTime}
+        <Flex
+          mb="5"
+          alignItems="center"
+          gap="10"
+          justifyContent="center"
+          flexDirection={isMobile ? "column" : "row"}
+        >
+          <Box flex="50%" alignItems="center">
+            <Heading as="h2" mb="4" fontSize="xl">
+              Current Time
             </Heading>
-            {/* <Heading as="h2" mb="8" fontSize="xl">
+            <Heading as="h2" mb="8" fontSize="xl">
               {currentTime}
-            </Heading> */}
+            </Heading>
+
+            <Heading as="h2" mb="4" fontSize="xl">
+              Total Time Worked Today
+            </Heading>
+            <Heading as="h2" mb="4" fontSize="xl">
+              {" "}
+              {totalTime.totalHours}h {totalTime.totalMinutes}m
+            </Heading>
           </Box>
-          <Box flex="50%">
-            <Heading as="h2" mb="4" fontSize="xl" textAlign="center">
+          {isMobile && <Divider borderColor="black" />}
+          <Box flex="50%" alignItems="center">
+            <Heading as="h2" mb="4" fontSize="xl">
               Punching
             </Heading>
             {checkInError || checkOutError ? (
@@ -205,7 +217,6 @@ const HomeScreen = () => {
               ) : (
                 <Button
                   colorScheme="teal"
-                  alignItems="center"
                   style={buttonStyle}
                   onClick={handleCheckInOrOut}
                 >
@@ -213,36 +224,22 @@ const HomeScreen = () => {
                 </Button>
               )}
             </Heading>
-            <Heading as="h2" mb="8" fontSize="xl" textAlign="center">
+            <Heading as="h2" mb="8" fontSize="xl">
               Login Time: {convertToIST(latestRecord?.loginTime)}
             </Heading>
-            <Heading as="h2" mb="8" fontSize="xl" textAlign="center">
+            <Heading as="h2" mb="8" fontSize="xl">
               Logout Time: {convertToIST(latestRecord?.logoutTime)}
             </Heading>
-            <Heading as="h2" mb="8" fontSize="xl" textAlign="center">
+            <Heading as="h2" mb="8" fontSize="xl">
               Attendance Status: {latestRecord?.status}
             </Heading>
           </Box>
-        </Grid>
+        </Flex>
         <Divider borderColor="black" />
-        <Spacer h="50px" />
-        <Flex alignItems="center" justifyContent="center">
-          <Box>
-            <Heading as="h2" mb="8" fontSize="xl">
-              Total Time Worked Today : {totalTime.totalHours}h{" "}
-              {totalTime.totalMinutes}m
-            </Heading>
-            {/* <Heading as="h2" mb="4" fontSize="xl">
-              {" "}
-              {totalTime.totalHours}h {totalTime.totalMinutes}m
-            </Heading> */}
-          </Box>
-        </Flex>{" "}
-        <Heading as="h2" mb="8" fontSize="xl" textAlign="center">
+        <Heading as="h2" mb="8" mt="5" fontSize="xl" textAlign="center">
           All Attandance
         </Heading>
-        <Spacer h="50px" />
-        {latestRecord && <MyCalendar attendanceData={attendanceAll} />}{" "}
+        {latestRecord && <MyCalendar attendanceData={attendanceAll} />}
         {/* Conditionally render MyCalendar */}
       </Box>
     </>
