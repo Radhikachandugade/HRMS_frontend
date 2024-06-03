@@ -111,7 +111,7 @@ const HomeScreen = () => {
   const buttonStyle = {
     height: "40px",
     width: "120px",
-    position: "absolute",
+    position: "fixed",
     left: "41rem",
   };
 
@@ -168,7 +168,7 @@ const HomeScreen = () => {
       <Box bgColor="white" rounded="lg" shadow="lg" px="5" py="5">
         <Grid mb="5" alignItems="center" gap="10">
           <Box flex="50%">
-            <Heading as="h2" fontSize="xl" textAlign="center">
+            <Heading as="h2" fontSize="xl">
               Current Time {currentTime}
             </Heading>
             {/* <Heading as="h2" mb="8" fontSize="xl">
@@ -205,6 +205,7 @@ const HomeScreen = () => {
               ) : (
                 <Button
                   colorScheme="teal"
+                  alignItems="center"
                   style={buttonStyle}
                   onClick={handleCheckInOrOut}
                 >
