@@ -111,7 +111,7 @@ const HomeScreen = () => {
   const buttonStyle = {
     height: "40px",
     width: "120px",
-    position: "initial",
+    position: "absolute",
     left: "41rem",
   };
 
